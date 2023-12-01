@@ -4,7 +4,7 @@ const calculateCalibrationValue = (value) => {
     let lastDigit = undefined;
     let startPointer = 0;
     let endPointer = value.length - 1;
-    while (startPointer <= endPointer) {
+    while (startPointer < value.length) {
         const isStartCharacterANumber = Boolean(Number(value[startPointer]));
         if (isStartCharacterANumber && firstDigit == undefined) {
             firstDigit = Number(value[startPointer]);
