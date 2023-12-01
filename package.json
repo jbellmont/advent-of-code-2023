@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "day-1-1": "npx tsc && node ./day-1/part-1",
-    "day-1-2": "npx tsc && node ./day-1/part-2"
+    "day-1-1": "npx tsc && node ./dist/day-1/part-1",
+    "day-1-2": "npx tsc && node ./dist/day-1/part-2"
   },
   "author": "",
   "license": "ISC",
