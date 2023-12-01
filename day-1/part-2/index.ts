@@ -47,14 +47,12 @@ const getSumOfCalibrationValues = async (
   pathToValues: string
 ): Promise<number | undefined> => {
   try {
-    const values = await readFile(pathToValues, { encoding: "utf-8" });
-    const valuesSplitPerLine = values.split("\n");
-    const sumOfCalibrationValues = valuesSplitPerLine.reduce(
-      (previousValue, currentValue) => {
-        return previousValue + calculateCalibrationValue(currentValue);
-      },
-      0
+    const values = (await readFile(pathToValues, { encoding: "utf-8" })).split(
+      "\n"
     );
+    const sumOfCalibrationValues = values.reduce((previous, current) => {
+      return previous + calculateCalibrationValue(current);
+    }, 0);
 
     return sumOfCalibrationValues;
   } catch (error) {
