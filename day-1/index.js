@@ -1,7 +1,4 @@
 import { readFile } from "node:fs/promises";
-// Iterate through text from start + back
-// add first digit found with last digit found together
-// then find the sum of all of these
 const calculateCalibrationValue = (value) => {
     let firstDigit = undefined;
     let lastDigit = undefined;
@@ -25,11 +22,12 @@ const calculateCalibrationValue = (value) => {
     else if (lastDigit === undefined && firstDigit !== undefined) {
         lastDigit = firstDigit;
     }
-    return firstDigit && lastDigit
-        ? Number(firstDigit.toString() + lastDigit.toString())
-        : 0;
+    if (firstDigit && lastDigit) {
+        return Number(firstDigit.toString() + lastDigit.toString());
+    }
+    return 0;
 };
-const calculateSumOfCalibrationValues = async (pathToValues) => {
+const getSumOfCalibrationValues = async (pathToValues) => {
     try {
         const values = await readFile(pathToValues, { encoding: "utf-8" });
         const valuesSplitPerLine = values.split("\n");
@@ -39,7 +37,7 @@ const calculateSumOfCalibrationValues = async (pathToValues) => {
         return sumOfCalibrationValues;
     }
     catch (error) {
-        console.error(error);
+        console.error("Had trouble reading file provided!", error);
     }
 };
-console.log(await calculateSumOfCalibrationValues("day-1/input.txt"));
+console.log(await getSumOfCalibrationValues("day-1/input.txt"));

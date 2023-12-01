@@ -54,4 +54,4 @@ const getSumOfCalibrationValues = async (
   }
 };
 
-await getSumOfCalibrationValues("day-1/input.txt");
+console.log(await getSumOfCalibrationValues("day-1/input.txt"));
