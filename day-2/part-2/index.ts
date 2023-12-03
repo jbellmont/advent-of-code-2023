@@ -1,41 +1,50 @@
 import { readFile } from "node:fs/promises";
 
-const MATCH_GAME_ID_REGEX = /(?<=Game\s)(\d+)/g;
 const MATCH_COLOUR_COUNTS_REGEX = /(\d+)\s+(\w+)/g;
 
-const MAXIMUM_NUMBER_OF_CUBES = {
-  blue: 14,
-  green: 13,
-  red: 12,
-};
+type Colours = "blue" | "green" | "red";
 
-const calculateSumOfPossibleGameIds = (values: string[]): number => {
+const calculateSumOfPowerOfSets = (values: string[]): number => {
   return values.reduce((previous, current) => {
     const colourCountPairs = current.match(MATCH_COLOUR_COUNTS_REGEX);
     if (!colourCountPairs) {
       return previous;
     }
 
+    const minimumSetOfCubes: Record<Colours, number> = {
+      blue: 0,
+      green: 0,
+      red: 0,
+    };
+
     for (const colourCount of colourCountPairs) {
       const splitBySpace = colourCount.split(" ");
       const count = Number(splitBySpace[0]);
-      const colour = splitBySpace[1] as keyof typeof MAXIMUM_NUMBER_OF_CUBES;
+      const colour = splitBySpace[1] as Colours;
 
-      if (count > MAXIMUM_NUMBER_OF_CUBES[colour]) {
-        return previous;
+      if (count > minimumSetOfCubes[colour]) {
+        minimumSetOfCubes[colour] = count;
       }
     }
 
-    const gameId = current.match(MATCH_GAME_ID_REGEX);
-    if (!gameId) {
-      return previous;
-    }
+    const sumOfPower = Object.entries(minimumSetOfCubes).reduce(
+      (previous, current) => {
+        const colourCount = current[1];
 
-    return previous + Number(gameId);
+        if (previous === 0) {
+          return colourCount;
+        }
+
+        return colourCount * previous;
+      },
+      0
+    );
+
+    return previous + sumOfPower;
   }, 0);
 };
 
-const getSumOfPossibleGameIds = async (
+const getSumOfPowerOfSets = async (
   pathToGames: string
 ): Promise<number | undefined> => {
   try {
@@ -43,10 +52,10 @@ const getSumOfPossibleGameIds = async (
       "\n"
     );
 
-    return calculateSumOfPossibleGameIds(values);
+    return calculateSumOfPowerOfSets(values);
   } catch (error) {
     console.error("Had trouble reading file provided!", error);
   }
 };
 
-console.log(await getSumOfPossibleGameIds("day-2/part-1/input.txt"));
+console.log(await getSumOfPowerOfSets("day-2/part-2/input.txt"));
