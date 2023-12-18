@@ -8,7 +8,9 @@
     "day-1-1": "npx tsc && node ./dist/day-1/part-1",
     "day-1-2": "npx tsc && node ./dist/day-1/part-2",
     "day-2-1": "npx tsc && node ./dist/day-2/part-1",
-    "day-2-2": "npx tsc && node ./dist/day-2/part-2"
+    "day-2-2": "npx tsc && node ./dist/day-2/part-2",
+    "day-3-1": "npx tsc && node ./dist/day-3/part-1",
+    "day-3-2": "npx tsc && node ./dist/day-3/part-2"
   },
   "author": "",
   "license": "ISC",
