@@ -19,7 +19,8 @@
     "day-6-2": "clear && npx tsc && node ./dist/day-6/part-2",
     "day-7-1": "clear && npx tsc && node ./dist/day-7/part-1",
     "day-7-2": "clear && npx tsc && node ./dist/day-7/part-2",
-    "day-8-1": "clear && npx tsc && node ./dist/day-8/part-1"
+    "day-8-1": "clear && npx tsc && node ./dist/day-8/part-1",
+    "day-8-2": "clear && npx tsc && node ./dist/day-8/part-2"
   },
   "author": "",
   "license": "ISC",
